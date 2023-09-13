@@ -13,6 +13,7 @@ django-simple-history = "^3.3.0"
 django-taggit = "^4.0.0"
 whitenoise = "^6.5.0"
 django-environ = "^0.11.2"
+uvicorn = "^0.23.2"
 
 
 [tool.poetry.group.dev.dependencies]

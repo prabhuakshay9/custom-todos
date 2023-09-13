@@ -13,4 +13,4 @@ rem Change to the project directory and start the Django development server
 set "project_dir=!batch_dir!"
 echo Starting Django development server in !project_dir!...
 cd "!project_dir!"
-python manage.py runserver
+python -m uvicorn config.asgi:application
