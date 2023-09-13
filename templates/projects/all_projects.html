@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{#  Breadcrumbs #}
+{% block breadcrumb %}
+    <li>
+        <a href="{% url 'projects:view_all_projects' %}"
+           class="block transition text-indigo-500 hover:text-amber-800 transition duration-100">
+            <span> Projects </span>
+        </a>
+    </li>
+{% endblock %}
+
+
+{# Main Block #}
+{% block main %}
+    {% if projects %}
+        {% for project in projects %}
+            <article class="bg-white px-4 py-3 mb-6 ring ring-indigo-50 p-8">
+                <div class="flex items-start sm:gap-8">
+                    <div>
+                        <h3 class="text-lg font-medium sm:text-xl">
+                            <a href="{% url 'projects:view_project' project.id %}"
+                               class="hover:underline text-indigo-500 hover:text-amber-800 transition duration-100">
+                                {{ project.title }}
+                            </a>
+                        </h3>
+
+                        <p class="mt-1 text-sm text-gray-500">
+                            {{ project.description }}
+                        </p>
+                        <div class="mt-4 flex items-center gap-2">
+                            <div class="flex items-center gap-1 text-gray-500 text-xs font-medium">
+                                <a href="{% url 'admin:projects_project_change' project.id %}"
+                                   class="text-indigo-500 hover:text-amber-800 transition duration-100">
+                                    Edit in Admin Portal
+                                </a>
+                            </div>
+                            <p class="mt-2 text-xs font-medium text-gray-500 mt-0 flex items-center">
+                                | Status:
+                                {% if project.active %}
+                                    Open
+                                {% else %}
+                                    Closed
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <div class="flex items-center justify-center p-10 w-full text-2xl font-semibold">
+            No Projects Found
+        </div>
+    {% endif %}
+
+
+{% endblock %}

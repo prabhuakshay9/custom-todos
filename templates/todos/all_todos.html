@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="{% url 'todos:all_todos' %}"
+           class="block transition text-indigo-500 hover:text-amber-800 transition duration-100">
+            <span> Todos </span>
+        </a>
+    </li>
+{% endblock %}
+
+{% block main %}
+    {% if search %}
+        <div class="font-medium mb-2">Searching: {{ search|upper }}</div>
+    {% endif %}
+    {% if todos %}
+        {% include 'todos/components/todos.html' %}
+    {% else %}
+        <div class="flex items-center justify-center p-10 w-full text-2xl font-semibold">
+            Nothing found
+        </div>
+    {% endif %}
+
+{% endblock %}

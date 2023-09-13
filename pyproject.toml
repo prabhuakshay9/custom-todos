@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "todos"
+version = "0.1.0"
+description = ""
+authors = ["Akshay Prabhu <prabhuakshay9@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.2.5"
+django-extensions = "^3.2.3"
+django-simple-history = "^3.3.0"
+django-taggit = "^4.0.0"
+whitenoise = "^6.5.0"
+django-environ = "^0.11.2"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.0.289"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+
+[tool.isort]
+line_length = 120
+

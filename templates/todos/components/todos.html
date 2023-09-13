@@ -1,0 +1,68 @@
+{% for todo in todos %}
+    <article
+            class="overflow-hidden shadow transition hover:shadow-lg mb-6">
+        <div class="bg-white p-4 sm:p-6 border-l-4 {% if todo.closed_on %} border-green-300 {% else %} border-red-300 {% endif %}">
+
+            <div class="flex mb-1 items-center">
+                <div class="text-lg text-gray-900">
+                    {{ todo.title }}
+                </div>
+            </div>
+
+            <div class="text-xs text-gray-500">
+                <span>{{ todo.created_on }} - </span>
+                <span>
+                    {% if todo.closed_on %}
+                        <span>
+                            {{ todo.closed_on }}
+                        </span>
+                    {% else %}
+                        <span>Ongoing</span>
+                    {% endif %}
+                </span>
+                {% if not todo.closed_on %}
+                    <span> | Deadline: </span>
+                    <span class="{% if todo.deadline <= today %} text-red-500 {% endif %}">{{ todo.deadline }}</span>
+                {% endif %}
+            </div>
+
+            <p class="mt-2 text-sm text-gray-500">
+                {{ todo.description }}
+            </p>
+
+
+            <div class="block text-xs text-gray-500 mt-2">
+                <a class="text-xs text-indigo-500 hover:text-amber-800 transition duration-100"
+                   href="{% url 'admin:todos_todo_change' todo.id %}">
+                    Edit in Admin Portal
+                </a>
+                <span> | </span>
+                {% if todo.closed_on %}
+                    <form action="{% url 'todos:mark_as_open' todo.id %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="referrer" value="{{ request.path }}">
+                        <button type="submit" class="text-indigo-500 hover:text-amber-800 transition duration-100">
+                            Mark as Open
+                        </button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'todos:mark_as_closed' todo.id %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <input type="hidden" name="referrer" value="{{ request.path }}">
+                        <button type="submit" class="text-indigo-500 hover:text-amber-800 transition duration-100">
+                            Mark as Closed
+                        </button>
+                    </form>
+                {% endif %}
+                {% if todo.project %}
+                    <span> | Project: </span>
+                    <a href="{% url 'projects:view_project' todo.project.id %}"
+                       class="text-indigo-500 hover:text-amber-800 transition duration-100">
+                        {{ todo.project.title }}
+                    </a>
+                {% endif %}
+            </div>
+
+        </div>
+    </article>
+{% endfor %}

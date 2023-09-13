@@ -1,0 +1,39 @@
+<div class="bg-white drop-shadow px-6 py-4 mt-4">
+    {# Add To-do Form #}
+    <div>
+        {# Header #}
+        <div class="flex items-end justify-between">
+            <div class="text-2xl font-semibold">Create a Project</div>
+            <div class="">
+                <a href="{% url 'projects:view_all_projects' %}"
+                   class="text-indigo-500 hover:text-amber-800 transition duration-100">View all Projects</a>
+            </div>
+        </div>
+        <hr class="mt-2 mb-4 border-gray-200">
+
+        {# Form #}
+        <form action="{% url 'projects:create_project' %}" method="post" class="ml-2">
+            {% csrf_token %}
+            {#  Title #}
+            <div class="mb-2">
+                <label for="projectTitle" class="block text-sm font-medium">Title:</label>
+                <input type="text" name="title" id="projectTitle" class="block py-1 w-full border-gray-300" required>
+            </div>
+
+            {#  Duration #}
+            <div class="mb-2">
+                <label for="projectDescription" class="block text-sm font-medium">Description:</label>
+                <textarea name="description" id="projectDescription" cols="30" rows="3" required
+                          class="block border-gray-300 w-full resize-none"></textarea>
+            </div>
+
+            <div class="mt-2">
+                <button type="submit"
+                        class="inline-block bg-blue-500 px-5 py-2 text-sm font-medium text-white">
+                    Create New Project
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

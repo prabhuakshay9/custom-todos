@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="{% url 'todos:day_report' %}"
+           class="block transition text-indigo-500 hover:text-amber-800 transition duration-100">
+            <span> Day Report </span>
+        </a>
+    </li>
+    <li class="rtl:rotate-180">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            ></path>
+        </svg>
+    </li>
+    <li>
+        <span class="block">
+            Report Dated: {{ date|date:'d-m-Y' }}
+        </span>
+    </li>
+{% endblock %}
+
+{% block main %}
+    <form action="{% url 'todos:day_report' %}" method="get" class="flex gap-4 mb-4">
+        <input type="date" name="date" value="{% if date %}{{ date|date:'Y-m-d' }}{% endif %}" class="py-1">
+        <button type="submit"
+                class="inline-block bg-blue-500 px-5 py-2 text-sm font-medium text-white">
+            View Report
+        </button>
+    </form>
+    {% if todos %}
+        {% include 'todos/components/todos.html' %}
+    {% else %}
+        <div class="flex items-center justify-center p-10 w-full text-2xl font-semibold">
+            Nothing found
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    {#  Main Grid #}
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+
+        {# Sidebar #}
+        <div class="rounded-lg bg-gray-100">
+            {% include 'core/components/todo_form.html' %}
+            {% include 'core/components/project_form.html' %}
+        </div>
+
+        {# Main List #}
+        <div class="rounded-lg bg-gray-100 lg:col-span-2">
+            {% include 'todos/components/todos.html' %}
+        </div>
+    </div>
+{% endblock %}

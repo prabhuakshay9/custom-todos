@@ -1,0 +1,36 @@
+<div class="bg-white fixed w-screen px-5 h-14 drop-shadow flex items-center z-50">
+
+    {#  Search #}
+    <form action="{% url 'todos:all_todos' %}">
+        <div class="relative w-96">
+            <label for="Search" class="sr-only"> Search </label>
+            <input type="text" id="Search" placeholder="Search for..." name="search"
+                   value="{% if search %}{{ search }}{% endif %}"
+                   class="w-full rounded-md border-gray-300 py-2 pe-10 shadow-sm sm:text-sm w-96"/>
+            <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
+            <button type="submit" class="text-gray-600 hover:text-gray-700">
+                <span class="sr-only">Search</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor" class="h-4 w-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z">
+                    </path>
+                </svg>
+            </button>
+        </span>
+        </div>
+    </form>
+
+    {# Spacer #}
+    <div class="grow"></div>
+
+    {# Nav Links #}
+    <div class="flex gap-4 items-center">
+        <a href="{% url 'todos:day_report' %}" class="text-indigo-500 hover:text-amber-800 transition duration-100">
+            Day Report
+        </a>
+        <a href="{% url 'admin:index' %}" class="text-indigo-500 hover:text-amber-800 transition duration-100">
+            Admin Panel
+        </a>
+    </div>
+</div>
